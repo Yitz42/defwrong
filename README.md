@@ -1,6 +1,6 @@
 # Defwrong
 
-A satirical fan page for the (very real) Baltimore Less Wrong / ACX meetup.
+A satirical fan page for the (very real) Baltimore Less Wrong meetup.
 
 *Less Wrong is a direction. Def Wrong is a destination.*
 
