@@ -168,9 +168,9 @@ nav.top ul a:hover { color: var(--red); }
 .result .score { font: 900 2.4rem/1 Fraunces, serif; color: var(--gold); }
 
 /* bingo */
-.bingo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 24px; max-width: 680px; }
+.bingo { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin-top: 24px; max-width: 680px; }
 .bingo button {
-  aspect-ratio: 1; border: 1.5px solid var(--rule); background: var(--paper); color: var(--ink); border-radius: 8px;
+  min-width: 0; min-height: clamp(64px, 17vw, 124px); border: 1.5px solid var(--rule); background: var(--paper); color: var(--ink); border-radius: 8px;
   font: 500 clamp(.5rem, 1.5vw, .78rem)/1.2 "IBM Plex Mono", monospace; padding: 4px; overflow-wrap: anywhere; hyphens: auto; cursor: pointer; display: flex; align-items: center; justify-content: center; text-align: center;
 }
 .bingo button[aria-pressed="true"] { background: var(--gold); color: var(--black); border-color: var(--black); }
