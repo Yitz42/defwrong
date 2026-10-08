@@ -169,7 +169,7 @@ nav.top ul a:hover { color: var(--red); }
 .bingo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 24px; max-width: 680px; }
 .bingo button {
   aspect-ratio: 1; border: 1.5px solid var(--rule); background: var(--paper); color: var(--ink); border-radius: 8px;
-  font: 500 clamp(.55rem, 1.6vw, .8rem)/1.25 "IBM Plex Mono", monospace; padding: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; text-align: center;
+  font: 500 clamp(.5rem, 1.5vw, .78rem)/1.2 "IBM Plex Mono", monospace; padding: 4px; overflow-wrap: anywhere; hyphens: auto; cursor: pointer; display: flex; align-items: center; justify-content: center; text-align: center;
 }
 .bingo button[aria-pressed="true"] { background: var(--gold); color: var(--black); border-color: var(--black); }
 .bingo button.free { background: var(--red); color: #fff; border-color: var(--red); }
@@ -313,9 +313,9 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
   <!-- BINGO -->
   <section id="bingo">
     <div class="wrap">
-      <div class="kicker">Bring to your next meetup</div>
-      <h2>Rationalist Meetup Bingo</h2>
-      <p class="lede">Tap a square when it happens. Our forecasters give a 97% chance of bingo before 8:15 PM. The square for “discussion arrives at AI” is usually marked by 7:20.</p>
+      <div class="kicker">The official board · bring it to your next meetup</div>
+      <h2>Baltimore LW Bingo</h2>
+      <p class="lede">Tap a square when it happens. Our forecasters give a 97% chance of bingo before 8:15 PM. The “AI safety…” square is usually marked by 7:20.</p>
       <div class="bingo" id="bingo-grid"></div>
       <div class="bingo-msg" id="bingo-msg" aria-live="polite"></div>
       <button class="btn" id="bingo-new" style="margin-top:12px">Shuffle card</button>
@@ -494,18 +494,19 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
   });
 
   // ---------- bingo ----------
-  const squares = [
-    "Someone says “Bayesian”", "“Steelman”", "“What's the crux?”", "AI timelines", "An ACX post is cited",
-    "“On priors…”", "“Depends what you mean by…”", "Someone draws on a whiteboard", "Old Bay discourse", "“Epistemic status”",
-    "Petrov Day comes up", "“Taboo that word”", "A trolley problem", "Late because of the Beltway", "Meta-discussion of discussion norms",
-    "“Chesterton's fence”", "Board games come out", "Moloch is invoked", "A prediction market is mentioned", "“I notice I'm confused”",
-    "Goodhart's Law", "A Poe reference", "Effective altruism tangent", "“Fermi estimate time”", "Someone wears a math joke shirt",
-    "Utilitarianism vs. vibes", "“Have you read Unsong?”", "Crab provenance questioned",
+  // The real Baltimore LW bingo board, in its original layout. Center is the free space.
+  const board = [
+    "An argument about TLP", "People argue about definitions", "Making fun of the Bay Area", "“New Cause Area…”", "Zizians are mentioned",
+    "Rivka diagnoses someone with autism", "Rivka talks about pro-mortalism", "“We’re better than DC”", "Daniel mentioning land usage or Georgism", "Max tries to enforce staying on topic",
+    "James talks about sleep", "People argue over the definition of a post-rat", "FREE SPACE", "AI safety…", "Aella",
+    "Someone brings up “infohazards”", "Discussion about drugs", "Race and IQ…", "Consciousness", "People go on a long tangent about the math for something",
+    "Someone brings up “CFAR”", "People count how many people present are Jewish", "Someone proposes an ethically horrifying experiment", "Jeremy lies about something", "Rivka conditions behavior with candy",
   ];
   const bg = document.getElementById("bingo-grid"), msg = document.getElementById("bingo-msg");
-  function newCard() {
-    const pick = squares.slice().sort(() => Math.random() - 0.5).slice(0, 24);
-    pick.splice(12, 0, "FREE: someone says “well, actually”");
+  function newCard(shuffle) {
+    const pick = board.filter((_, i) => i !== 12);
+    if (shuffle) pick.sort(() => Math.random() - 0.5);
+    pick.splice(12, 0, board[12]);
     bg.innerHTML = pick.map((t, i) => `<button aria-pressed="${i === 12}" class="${i === 12 ? "free" : ""}" ${i === 12 ? "disabled" : ""}>${t}</button>`).join("");
     msg.textContent = "";
   }
@@ -520,8 +521,8 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
     const b = e.target.closest("button"); if (!b || b.disabled) return;
     b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); checkBingo();
   });
-  document.getElementById("bingo-new").addEventListener("click", newCard);
-  newCard();
+  document.getElementById("bingo-new").addEventListener("click", () => newCard(true));
+  newCard(false);
 
   // ---------- lute mouse ----------
   const songs = [
