@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Defwrong Baltimore</title>
+<meta name="description" content="Defwrong.org: a parody site for the (very real) Baltimore Less Wrong / ACX meetup. Less Wrong is a direction. Def Wrong is a destination.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f4ec;
+  --paper: #fffdf7;
+  --ink: #1d1b16;
+  --muted: #6b6457;
+  --rule: #ddd5c4;
+  --gold: #e8b10d;
+  --black: #111;
+  --red: #b3202a;
+  --green: #2f7a4b;
+  --green-bg: #e8f4ec;
+  --green-ink: #1c4f30;
+  --warn-bg: #fff2c4;
+  --link: #2f6c8f;
+  --shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 24px -12px rgba(0,0,0,.18);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15140f; --paper: #1e1c16; --ink: #eee8da; --muted: #a39b8a; --rule: #3a362c;
+    --green-bg: #17291e; --green-ink: #9fd8b1; --warn-bg: #3a3214; --link: #8cc4e3;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 6px 24px -12px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15140f; --paper: #1e1c16; --ink: #eee8da; --muted: #a39b8a; --rule: #3a362c;
+  --green-bg: #17291e; --green-ink: #9fd8b1; --warn-bg: #3a3214; --link: #8cc4e3;
+  --shadow: 0 1px 0 rgba(0,0,0,.3), 0 6px 24px -12px rgba(0,0,0,.6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 18px/1.6 "Source Serif 4", Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--link); text-underline-offset: 3px; }
+h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.15; margin: 0 0 .5em; }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 900; letter-spacing: -.01em; }
+h3 { font-size: 1.2rem; font-weight: 700; }
+.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+section { padding: 64px 0; border-top: 1px solid var(--rule); }
+.kicker { font: 600 .78rem/1 "IBM Plex Mono", monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 62ch; }
+
+/* Maryland flag stripe (approximate; the real one would take more CSS than our attention span) */
+.flag { display: grid; grid-template-columns: repeat(4, 1fr); height: 12px; }
+.flag .calvert { background: repeating-linear-gradient(90deg, var(--gold) 0 14px, var(--black) 14px 28px); }
+.flag .crossland { background: conic-gradient(var(--red) 25%, #fff 0 50%, var(--red) 0 75%, #fff 0); background-size: 24px 12px; }
+
+/* satire notice */
+.notice {
+  background: var(--warn-bg); border-bottom: 1px solid var(--rule);
+  font: 500 .88rem/1.45 "IBM Plex Mono", monospace; padding: 10px 0;
+}
+.notice strong { color: var(--red); }
+
+/* nav */
+nav.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+nav.top .wrap { display: flex; align-items: center; gap: 20px; height: 56px; }
+.logo { font: 900 1.35rem/1 Fraunces, serif; color: var(--ink); text-decoration: none; letter-spacing: -.02em; white-space: nowrap; }
+.logo s { color: var(--muted); font-weight: 400; text-decoration-thickness: 2px; text-decoration-color: var(--red); }
+.logo span { color: var(--red); }
+nav.top ul { display: flex; gap: 18px; list-style: none; margin: 0 0 0 auto; padding: 0; font: 500 .9rem/1 "IBM Plex Mono", monospace; }
+nav.top ul a { color: var(--ink); text-decoration: none; }
+nav.top ul a:hover { color: var(--red); }
+@media (max-width: 760px) { nav.top ul li:not(.keep) { display: none; } }
+
+/* hero */
+.hero { padding: 72px 0 56px; border-top: 0; }
+.hero h1 { font-size: clamp(2.6rem, 8vw, 5.6rem); font-weight: 900; letter-spacing: -.035em; margin-bottom: .25em; }
+.hero h1 .strike { position: relative; color: var(--muted); font-weight: 400; }
+.hero h1 .strike::after { content: ""; position: absolute; left: -4%; right: -4%; top: 52%; height: .09em; background: var(--red); transform: rotate(-4deg); }
+.hero .sub { font-size: clamp(1.1rem, 2.2vw, 1.4rem); max-width: 40ch; margin-bottom: 28px; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 10px; font: .82rem/1 "IBM Plex Mono", monospace; color: var(--muted); }
+.pill { border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 8px 12px; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0; }
+.btn { display: inline-block; font: 600 .95rem/1 "IBM Plex Mono", monospace; padding: 14px 18px; border-radius: 6px; text-decoration: none; border: 2px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer; }
+.btn.primary { background: var(--ink); color: var(--bg); }
+.btn:hover { transform: translateY(-1px); }
+
+/* ticker */
+.ticker { overflow: hidden; background: var(--black); color: #f3eedf; border-block: 3px solid var(--gold); font: 500 .85rem/1 "IBM Plex Mono", monospace; }
+.ticker .track { display: inline-flex; gap: 48px; padding: 12px 0; white-space: nowrap; animation: scroll 70s linear infinite; }
+.ticker b { color: var(--gold); }
+.ticker .up { color: #6fd38f; } .ticker .dn { color: #ff7b7b; }
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker .track { animation: none; } }
+
+/* REAL info boxes */
+.real {
+  position: relative; background: var(--green-bg); color: var(--green-ink);
+  border: 2px solid var(--green); border-radius: 10px; padding: 22px 22px 18px; margin-top: 18px;
+}
+.real::before {
+  content: "✓ ACTUALLY REAL INFORMATION"; position: absolute; top: -12px; left: 16px;
+  background: var(--green); color: #fff; font: 700 .7rem/1 "IBM Plex Mono", monospace; letter-spacing: .1em; padding: 6px 8px; border-radius: 4px;
+}
+.real a { color: inherit; font-weight: 600; }
+.real dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 6px 0 0; }
+.real dt { font: 600 .8rem/1.9 "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .06em; }
+.real dd { margin: 0; }
+@media (max-width: 560px) { .real dl { grid-template-columns: 1fr; gap: 2px; } .real dd { margin-bottom: 10px; } }
+.fine { font-size: .85rem; color: var(--muted); }
+.real .fine { color: var(--green-ink); opacity: .85; }
+
+/* cards */
+.grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 28px; }
+.card { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; box-shadow: var(--shadow); }
+.card .num { font: 700 .75rem/1 "IBM Plex Mono", monospace; color: var(--red); letter-spacing: .1em; }
+.card p { margin: .4em 0 0; font-size: .97rem; }
+.card .karma { margin-top: 14px; font: .78rem/1 "IBM Plex Mono", monospace; color: var(--muted); }
+
+/* litanies */
+.litany { font: italic 1.2rem/1.7 "Source Serif 4", serif; border-left: 4px solid var(--gold); padding: 6px 0 6px 20px; margin: 26px 0; max-width: 60ch; }
+.litany cite { display: block; font: normal .8rem/1.4 "IBM Plex Mono", monospace; color: var(--muted); margin-top: 8px; }
+
+/* quiz */
+.quiz { display: grid; gap: 14px; margin-top: 24px; }
+.q { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; display: grid; grid-template-columns: 1fr auto; gap: 10px 18px; align-items: center; }
+.q .stmt { grid-column: 1 / -1; font-weight: 600; }
+.q .tf { display: flex; gap: 6px; }
+.q .tf button { font: 600 .8rem/1 "IBM Plex Mono", monospace; padding: 9px 12px; border-radius: 6px; border: 1.5px solid var(--rule); background: transparent; color: var(--ink); cursor: pointer; }
+.q .tf button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.q label { display: flex; align-items: center; gap: 10px; font: .8rem/1 "IBM Plex Mono", monospace; color: var(--muted); }
+.q input[type=range] { width: min(220px, 40vw); accent-color: var(--red); }
+.q .why { grid-column: 1 / -1; font-size: .92rem; display: none; border-top: 1px dashed var(--rule); padding-top: 10px; }
+.q.done .why { display: block; }
+.q.right { border-color: var(--green); } .q.wrong { border-color: var(--red); }
+.result { margin-top: 20px; padding: 20px; border-radius: 10px; background: var(--black); color: #f3eedf; display: none; }
+.result.show { display: block; }
+.result .score { font: 900 2.4rem/1 Fraunces, serif; color: var(--gold); }
+
+/* bingo */
+.bingo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 24px; max-width: 680px; }
+.bingo button {
+  aspect-ratio: 1; border: 1.5px solid var(--rule); background: var(--paper); color: var(--ink); border-radius: 8px;
+  font: 500 clamp(.55rem, 1.6vw, .8rem)/1.25 "IBM Plex Mono", monospace; padding: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; text-align: center;
+}
+.bingo button[aria-pressed="true"] { background: var(--gold); color: var(--black); border-color: var(--black); }
+.bingo button.free { background: var(--red); color: #fff; border-color: var(--red); }
+.bingo-msg { font: 700 1.1rem/1.4 Fraunces, serif; color: var(--red); min-height: 1.6em; margin-top: 12px; }
+
+/* faq */
+details { border-bottom: 1px solid var(--rule); padding: 14px 0; }
+summary { cursor: pointer; font: 700 1.08rem/1.4 Fraunces, serif; }
+details p { margin: .6em 0 0; }
+
+/* testimonials */
+blockquote.t { margin: 0; background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 20px; box-shadow: var(--shadow); }
+blockquote.t p { margin: 0 0 10px; font-style: italic; }
+blockquote.t footer { font: .8rem/1.4 "IBM Plex Mono", monospace; color: var(--muted); }
+
+footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size: .88rem; color: var(--muted); }
+.counter { display: inline-block; background: #000; color: #39ff14; font: 600 .9rem/1 "IBM Plex Mono", monospace; padding: 6px 10px; border: 2px inset #888; letter-spacing: .15em; }
+</style>
+</head>
+<body>
+
+<div class="flag" aria-hidden="true"><div class="calvert"></div><div class="crossland"></div><div class="crossland"></div><div class="calvert"></div></div>
+
+<div class="notice">
+  <div class="wrap"><strong>⚠ SATIRE NOTICE:</strong> Almost everything on this site is a joke. Anything in a <span style="color:var(--green);font-weight:700">green box</span> is real information about the actual Baltimore Less Wrong / ACX meetup. Please update accordingly.</div>
+</div>
+
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top"><s>Less</s><span>Def</span>Wrong</a>
+    <ul>
+      <li class="keep"><a href="#meetup">Meetup</a></li>
+      <li><a href="#sequins">The Sequins</a></li>
+      <li><a href="#calibrate">Calibrate</a></li>
+      <li><a href="#bingo">Bingo</a></li>
+      <li class="keep"><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker">Baltimore's Rationalist Community · Est. [citation needed]</div>
+      <h1><span class="strike">Less</span> Def Wrong.</h1>
+      <p class="sub">Less Wrong is a <em>direction</em>. Def Wrong is a <em>destination</em>. Refining the art of human rationality, one crab cake at a time, hon.</p>
+      <div class="btns">
+        <a class="btn primary" href="#meetup">Find the real meetup →</a>
+        <a class="btn" href="#calibrate">Test your calibration</a>
+      </div>
+      <div class="meta">
+        <span class="pill">🦀 Credence measured in bushels</span>
+        <span class="pill">📍 Technically not in Baltimore (see FAQ)</span>
+        <span class="pill">🕖 Sundays, 7 PM (real)</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-label="Fake prediction markets">
+    <div class="track" id="ticker"></div>
+  </div>
+
+  <!-- MEETUP: the real stuff -->
+  <section id="meetup">
+    <div class="wrap">
+      <div class="kicker">The part that isn't a joke</div>
+      <h2>Come be wrong with us in person.</h2>
+      <p class="lede">We meet every week to talk about philosophy, rationality, AI, and whether a crab cake with more than 4% filler is still a crab cake (it isn't). Newcomers who have read zero blog posts are, in our estimation, roughly as welcome as those who have read all of them.</p>
+
+      <div class="real">
+        <dl>
+          <dt>What</dt><dd>Baltimore Less Wrong meetup, which doubles as the Baltimore Astral Codex Ten (ACX) meetup. Weekly, philosophically oriented discussion, plus occasional rituals, potluck dinners and game nights.</dd>
+          <dt>When</dt><dd>Sundays at 7:00 PM. About half the meetups are virtual and half are in person, so check the weekly reminder email for which kind this week is.</dd>
+          <dt>Where</dt><dd>In-person meetups have been held at UMBC: Performing Arts and Humanities Building, 1000 Hilltop Circle, Baltimore, MD 21250. For the big ACX "Meetups Everywhere" events, look for a sign reading “ACX Meetup.”</dd>
+          <dt>Parking</dt><dd>Free on weekends at UMBC.</dd>
+          <dt>Organizers</dt><dd>adrusi and Rivka.</dd>
+          <dt>Contact</dt><dd>Email <a href="mailto:rivka@adrusi.com">rivka@adrusi.com</a> to join the mailing list for weekly reminders.</dd>
+          <dt>Chat</dt><dd>There's a <a href="https://discord.com/invite/meeUKNBRjX" rel="noopener">Baltimore ACX Discord</a> for the social side.</dd>
+          <dt>Links</dt><dd><a href="https://www.lesswrong.com/groups/SwxCqnYJaxjkXdzZ2" rel="noopener">LessWrong group page</a> · <a href="https://www.greaterwrong.com/posts/f9vBqaK38fmJBkCCG/baltimore-usa-acx-spring-schelling-2026" rel="noopener">Spring 2026 ACX meetup post</a> · <a href="https://www.astralcodexten.com/" rel="noopener">Astral Codex Ten</a> (Scott Alexander posts “Meetups Everywhere” lists each spring and fall)</dd>
+        </dl>
+        <p class="fine">Collected from public listings, October 2026. Rooms and schedules change, so email before driving out. Food and drinks were provided at the last big ACX meetup; RSVPs were optional but helped with food.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section id="virtues">
+    <div class="wrap">
+      <div class="kicker">Foundational texts, lightly Old Bayed</div>
+      <h2>The Twelve Virtues of Bawlmer Rationality</h2>
+      <p class="lede">Curiosity, relinquishment, lightness, evenness, argument, empiricism, simplicity, humility, perfectionism, precision, scholarship, and <strong>Old Bay</strong>. The twelfth virtue is nameless in the original. Here, it is a seasoning, and it goes on everything, including the other eleven virtues.</p>
+
+      <div class="litany">
+        If the crabs are from Louisiana, I desire to believe that the crabs are from Louisiana.<br>
+        If the crabs are from the Chesapeake, I desire to believe that the crabs are from the Chesapeake.<br>
+        Let me not become attached to crabs I may not want.
+        <cite>The Litany of Tarski (Maryland Seafood Edition)</cite>
+      </div>
+
+      <div class="litany">
+        What is true is already so. Owning up to it doesn't make it worse.<br>
+        The Beltway is already backed up. Not merging won't un-back it.
+        <cite>The Litany of Gendlin (I-695 Edition)</cite>
+      </div>
+
+      <div class="litany">
+        Tsuyoku naritai, hon.
+        <cite>Motto, as pronounced in Dundalk</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEQUINS -->
+  <section id="sequins">
+    <div class="wrap">
+      <div class="kicker">Required reading (nobody has finished it)</div>
+      <h2>The Sequins</h2>
+      <p class="lede">Like the Sequences, but shinier and with less coherent structure. Estimated reading time: you will not finish them.</p>
+      <div class="grid" id="sequins-grid"></div>
+    </div>
+  </section>
+
+  <!-- CALIBRATION QUIZ -->
+  <section id="calibrate">
+    <div class="wrap">
+      <div class="kicker">Interactive · scored with a real Brier score</div>
+      <h2>The Calibration Crab</h2>
+      <p class="lede">Eight claims about Baltimore. Call each one true or false and say how confident you are. Being confidently wrong costs you a lot. Being humbly wrong costs a little. Being Def Wrong is the house specialty.</p>
+      <div class="quiz" id="quiz"></div>
+      <div class="btns"><button class="btn primary" id="grade">Reveal the territory</button><button class="btn" id="reset">Reset priors</button></div>
+      <div class="result" id="result" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- BINGO -->
+  <section id="bingo">
+    <div class="wrap">
+      <div class="kicker">Bring to your next meetup</div>
+      <h2>Rationalist Meetup Bingo</h2>
+      <p class="lede">Tap a square when it happens. Our forecasters give a 97% chance of bingo before 8:15 PM. The square for “discussion arrives at AI” is usually marked by 7:20.</p>
+      <div class="bingo" id="bingo-grid"></div>
+      <div class="bingo-msg" id="bingo-msg" aria-live="polite"></div>
+      <button class="btn" id="bingo-new" style="margin-top:12px">Shuffle card</button>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="praise">
+    <div class="wrap">
+      <div class="kicker">Testimonials (made up, as testimonials usually are)</div>
+      <h2>What people are saying</h2>
+      <div class="grid">
+        <blockquote class="t"><p>“Quoth the Raven: ‘Update.’”</p><footer>Edgar Allan Poe, probably, from Westminster Burying Ground</footer></blockquote>
+        <blockquote class="t"><p>“Finally, a community that takes in an even larger volume of garbage takes than I do.”</p><footer>Mr. Trash Wheel (googly-eyed; no relation; did not say this)</footer></blockquote>
+        <blockquote class="t"><p>“I arrived 90% sure the Ravens would win on Sunday. I left still 90% sure, but now I can explain why that's well-calibrated.”</p><footer>Attendee, fictional</footer></blockquote>
+        <blockquote class="t"><p>“I came for the Bayes. I stayed for the potluck. I left with a 40-minute opinion about Formstone.”</p><footer>Another attendee, also fictional</footer></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="kicker">Frequently Asked Questions (by us, to ourselves)</div>
+      <h2>FAQ</h2>
+      <details open>
+        <summary>Is this real?</summary>
+        <p>The meetup is real. This website is a joke. If something is inside a green “ACTUALLY REAL INFORMATION” box, it was copied from public listings. Everything else should get a credence somewhere between “satire” and “a bit.”</p>
+      </details>
+      <details>
+        <summary>Is this the official site?</summary>
+        <p>No. It's a parody fan page. For anything official, email the organizers at <a href="mailto:rivka@adrusi.com">rivka@adrusi.com</a> or check the <a href="https://www.lesswrong.com/groups/SwxCqnYJaxjkXdzZ2" rel="noopener">LessWrong group page</a>.</p>
+      </details>
+      <details>
+        <summary>Why “Defwrong”?</summary>
+        <p>We did a cost-benefit analysis on becoming <em>less</em> wrong and found the marginal returns were declining. Being <em>definitely</em> wrong, by contrast, is cheap, reliable and scalable. We are also, somewhere in our hearts, still trying to be less wrong. Don't tell anyone.</p>
+      </details>
+      <details>
+        <summary>Is the meetup actually in Baltimore?</summary>
+        <p>Here is a fact: UMBC stands for University of Maryland, <em>Baltimore County</em>, which is a separate jurisdiction from Baltimore City. Its mailing address says “Baltimore” and the campus is near Catonsville and Arbutus. So we're wrong about our own name before the meetup even starts. Efficient.</p>
+      </details>
+      <details>
+        <summary>Do I need to have read the Sequences?</summary>
+        <p>No. Nobody checks. Half of us have read them, a quarter claim to have read them, and the remaining quarter are still on “The Simple Truth.” You're welcome to just show up and talk.</p>
+      </details>
+      <details>
+        <summary>Will AI kill us all?</summary>
+        <p>Great question for the meetup. Allow three hours. Bring snacks.</p>
+      </details>
+      <details>
+        <summary>Where do I park?</summary>
+        <p>For real: parking at UMBC is free on weekends, and the meetup is on Sunday. Our model rarely gets anything this right.</p>
+      </details>
+      <details>
+        <summary>Is Mr. Trash Wheel an aligned AI?</summary>
+        <p>He eats trash at the mouth of the Jones Falls, has googly eyes, and has never once tried to seize resources beyond the Inner Harbor. Professor Trash Wheel, Captain Trash Wheel and Gwynnda the Good Wheel of the West also seem fine. In terms of track record, they are the most aligned systems in Maryland.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p><span class="counter" id="counter">0000000</span> &nbsp;visitors (± a lot; p &lt; 0.05 that this number means anything)</p>
+    <p><strong>Defwrong.org is satire.</strong> It is not affiliated with or endorsed by LessWrong.com, Lightcone Infrastructure, Astral Codex Ten, UMBC, McCormick &amp; Co. (Old Bay), the Baltimore Ravens, or the Waterfront Partnership's Healthy Harbor Initiative (the Trash Wheels). All testimonials are fictional. Meetup details were collected from public listings in October 2026 and could be out of date. Please email the organizers before you drive anywhere.</p>
+    <p>Epistemic status: joking, mostly. Confidence: 0.7. Old Bay: yes.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ---------- ticker ----------
+  const markets = [
+    ["Discussion reaches AI within 20 min", "94%", "up"],
+    ["Someone says “this is the Orioles' year”", "100%", "up"],
+    ["Beltway traffic clears before heat death of universe", "3%", "dn"],
+    ["Crab-cake filler debate ends in consensus", "<1%", "dn"],
+    ["UMBC weekend parking is free", "99.9% (this one's real)", "up"],
+    ["Mr. Trash Wheel achieves superintelligence", "0.4%", "up"],
+    ["Someone says “hon” unironically", "41%", "dn"],
+    ["Meetup starts at exactly 7:00 PM", "12%", "dn"],
+    ["Someone cites a 9,000-word ACX post from memory", "78%", "up"],
+    ["Old Bay appears on a dessert at the potluck", "33%", "up"],
+    ["Petrov Day ritual goes off without nuclear incident", "88%", "up"],
+    ["Someone says “well, actually” before 7:05", "96%", "up"],
+  ];
+  const html = markets.map(([q, p, d]) => `<span>${q} <b>${p}</b> <span class="${d}">${d === "up" ? "▲" : "▼"}</span></span>`).join("");
+  document.getElementById("ticker").innerHTML = html + html;
+
+  // ---------- sequins ----------
+  const sequins = [
+    ["Map and Territory and Formstone", "If your rowhouse facade is fake stone, is your map of it also fake? An inquiry into the epistemics of 1950s home improvement."],
+    ["How to Actually Change Your Mind (About Old Bay)", "Strong opinions, held loosely, seasoned heavily. Includes a 4,000-word appendix on J.O. versus Old Bay that nobody asked for."],
+    ["Mysterious Answers to Mysterious Questions", "Why is it “dug”? Why is it “warsh”? Why does the light rail stop exactly where it does? Applying “taboo your words” to the Bawlmer dialect."],
+    ["Politics Is the Mind-Killer", "And so is I-695 at 5:15 PM. A comparative study."],
+    ["The Simple Truth", "A shepherd counts sheep with pebbles. A Baltimorean counts crabs by the bushel and still argues about the price."],
+    ["Fake Explanations", "“It's because of the humidity.” A study of the most popular fake explanation in Maryland, which happens to be right a suspicious amount of the time."],
+    ["Belief in Belief", "On fans who say they expect the Orioles to win it all and make no plans for that outcome at all."],
+    ["Zombies: The Movie", "A rigorous p-zombie argument presented in a city where Edgar Allan Poe is buried, so we're legally required to be a little spooky about it."],
+    ["Shut Up and Multiply (Crab Legs)", "Expected-value calculations at all-you-can-eat crab feasts. A cautionary tale."],
+  ];
+  document.getElementById("sequins-grid").innerHTML = sequins.map(([t, d], i) =>
+    `<article class="card"><div class="num">SEQUIN ${String(i + 1).padStart(2, "0")}</div><h3>${t}</h3><p>${d}</p><div class="karma">▲ ${Math.floor(40 + ((i * 137) % 260))} karma · ${3 + ((i * 7) % 40)} min read · ${i % 3 === 0 ? "curated" : "frontpage"}</div></article>`
+  ).join("");
+
+  // ---------- calibration quiz ----------
+  const Q = [
+    ["Baltimore is the capital of Maryland.", false, "False. It's Annapolis. Baltimore is the largest city, which is a different thing (base rates, people)."],
+    ["UMBC was the first 16-seed to beat a 1-seed in the men's NCAA basketball tournament.", true, "True. In 2018 UMBC beat Virginia 74–54. Never put a probability of 0 on anything. Somewhere, a Brier score cried."],
+    ["Edgar Allan Poe is buried in Baltimore.", true, "True. He's at Westminster Hall and Burying Ground, at Fayette and Greene streets."],
+    ["The Baltimore Ravens are named after Poe's poem “The Raven.”", true, "True. A fan vote picked the name in 1996."],
+    ["UMBC is inside Baltimore City limits.", false, "False. It's in Baltimore County, near Catonsville and Arbutus. The meetup is Def Wrong about its own location."],
+    ["Old Bay seasoning was created in Baltimore.", true, "True. Gustav Brunn, a German immigrant, created it in Baltimore in 1939. McCormick bought it in 1990."],
+    ["“Johns” Hopkins is a typo for “John.”", false, "False. Johns was a family surname, from his great-grandmother Margaret Johns. Your pattern-matcher was confident and wrong, which is exactly what this site is for."],
+    ["“The Star-Spangled Banner” was inspired by the British bombardment of Fort McHenry.", true, "True. Francis Scott Key watched the bombardment in September 1814 and wrote the poem afterward."],
+  ];
+  const quiz = document.getElementById("quiz");
+  const state = Q.map(() => ({ ans: null, conf: 70 }));
+  function renderQuiz() {
+    quiz.innerHTML = Q.map(([s], i) => `
+      <div class="q" id="q${i}">
+        <div class="stmt">${i + 1}. ${s}</div>
+        <div class="tf" role="group" aria-label="True or false">
+          <button data-i="${i}" data-v="1" aria-pressed="false">TRUE</button>
+          <button data-i="${i}" data-v="0" aria-pressed="false">FALSE</button>
+        </div>
+        <label>conf <input type="range" min="50" max="99" value="70" data-i="${i}" aria-label="Confidence for claim ${i + 1}"> <span id="c${i}">70%</span></label>
+        <div class="why"></div>
+      </div>`).join("");
+  }
+  renderQuiz();
+  quiz.addEventListener("click", e => {
+    const b = e.target.closest("button[data-i]"); if (!b) return;
+    const i = +b.dataset.i; state[i].ans = b.dataset.v === "1";
+    b.parentElement.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  });
+  quiz.addEventListener("input", e => {
+    if (e.target.type !== "range") return;
+    const i = +e.target.dataset.i; state[i].conf = +e.target.value;
+    document.getElementById("c" + i).textContent = e.target.value + "%";
+  });
+  document.getElementById("grade").addEventListener("click", () => {
+    let brier = 0, answered = 0, right = 0;
+    Q.forEach(([, truth, why], i) => {
+      const el = document.getElementById("q" + i), s = state[i];
+      el.classList.remove("right", "wrong");
+      el.classList.add("done");
+      if (s.ans === null) { el.querySelector(".why").innerHTML = "<em>Skipped. Refusing to bet is also a bet.</em> " + why; return; }
+      answered++;
+      const pTrue = s.ans ? s.conf / 100 : 1 - s.conf / 100;
+      brier += (pTrue - (truth ? 1 : 0)) ** 2;
+      const ok = s.ans === truth; if (ok) right++;
+      el.classList.add(ok ? "right" : "wrong");
+      el.querySelector(".why").innerHTML = `<strong>${ok ? "✓" : "✗"}</strong> ${why}`;
+    });
+    const r = document.getElementById("result");
+    if (!answered) { r.innerHTML = "You answered nothing. That's the safest strategy, and also the least rational one."; r.classList.add("show"); return; }
+    const b = brier / answered;
+    const rank = b < 0.08 ? ["Oracle of Fells Point", "Suspiciously good. Are you a Johns Hopkins epidemiologist?"]
+      : b < 0.16 ? ["Merely Less Wrong", "Respectable. You may proceed to the potluck."]
+      : b < 0.25 ? ["Certified Def Wrong", "Welcome home. You have found your people."]
+      : ["Grand Master of Def Wrong", "You did worse than a coin flip, and with confidence. We have a plaque for you."];
+    r.innerHTML = `<div class="kicker" style="color:var(--gold)">Your Brier score (lower is better; 0.25 = coin flip)</div>
+      <div class="score">${b.toFixed(3)}</div>
+      <p style="margin:.4em 0 0"><strong>${rank[0]}</strong>: ${rank[1]} (${right}/${answered} correct)</p>`;
+    r.classList.add("show");
+  });
+  document.getElementById("reset").addEventListener("click", () => {
+    state.forEach(s => { s.ans = null; s.conf = 70; });
+    renderQuiz(); document.getElementById("result").classList.remove("show");
+  });
+
+  // ---------- bingo ----------
+  const squares = [
+    "Someone says “Bayesian”", "“Steelman”", "“What's the crux?”", "AI timelines", "An ACX post is cited",
+    "“On priors…”", "“Depends what you mean by…”", "Someone draws on a whiteboard", "Old Bay discourse", "“Epistemic status”",
+    "Petrov Day comes up", "“Taboo that word”", "A trolley problem", "Late because of the Beltway", "Meta-discussion of discussion norms",
+    "“Chesterton's fence”", "Board games come out", "Moloch is invoked", "A prediction market is mentioned", "“I notice I'm confused”",
+    "Goodhart's Law", "A Poe reference", "Effective altruism tangent", "“Fermi estimate time”", "Someone wears a math joke shirt",
+    "Utilitarianism vs. vibes", "“Have you read Unsong?”", "Crab provenance questioned",
+  ];
+  const bg = document.getElementById("bingo-grid"), msg = document.getElementById("bingo-msg");
+  function newCard() {
+    const pick = squares.slice().sort(() => Math.random() - 0.5).slice(0, 24);
+    pick.splice(12, 0, "FREE: someone says “well, actually”");
+    bg.innerHTML = pick.map((t, i) => `<button aria-pressed="${i === 12}" class="${i === 12 ? "free" : ""}" ${i === 12 ? "disabled" : ""}>${t}</button>`).join("");
+    msg.textContent = "";
+  }
+  function checkBingo() {
+    const on = [...bg.children].map(b => b.getAttribute("aria-pressed") === "true");
+    const lines = [];
+    for (let i = 0; i < 5; i++) { lines.push([0,1,2,3,4].map(j => i * 5 + j)); lines.push([0,1,2,3,4].map(j => j * 5 + i)); }
+    lines.push([0, 6, 12, 18, 24], [4, 8, 12, 16, 20]);
+    msg.textContent = lines.some(l => l.every(k => on[k])) ? "BINGO! Your prediction was correct. Collect zero karma." : "";
+  }
+  bg.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b || b.disabled) return;
+    b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); checkBingo();
+  });
+  document.getElementById("bingo-new").addEventListener("click", newCard);
+  newCard();
+
+  // ---------- visitor counter (fake, obviously) ----------
+  document.getElementById("counter").textContent = String(1000000 + Math.floor(Math.random() * 8999999)).padStart(7, "0");
+})();
+</script>
+</body>
+</html>
