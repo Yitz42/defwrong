@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Defwrong Baltimore</title>
+<link rel="icon" type="image/png" href="mouse.png">
+<link rel="apple-touch-icon" href="mouse.png">
 <meta name="description" content="Defwrong.org: a parody site for the (very real) Baltimore Less Wrong / ACX meetup. Less Wrong is a direction. Def Wrong is a destination.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,6 +95,23 @@ nav.top ul a:hover { color: var(--red); }
 .btn.primary { background: var(--ink); color: var(--bg); }
 .btn:hover { transform: translateY(-1px); }
 
+/* the mouse */
+.logo { display: inline-flex; align-items: center; gap: 10px; }
+.logo img { width: 30px; height: 30px; border-radius: 7px; }
+.hero .wrap { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+.hero .wrap > div { min-width: 0; }
+.mascot { margin: 0; text-align: center; max-width: 200px; }
+.mascot button { padding: 0; border: 0; background: none; cursor: pointer; border-radius: 22px; }
+.mascot img { display: block; width: 96px; height: 96px; margin: 0 auto; border-radius: 22px; box-shadow: var(--shadow); transform: rotate(-4deg); transition: transform .3s; }
+.mascot button:hover img, .mascot button:focus-visible img { transform: rotate(3deg) scale(1.06); }
+.mascot button.strum img { animation: strum .5s ease-in-out 3; }
+@keyframes strum { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(6deg) translateY(-4px); } }
+.mascot figcaption { font: .78rem/1.4 "IBM Plex Mono", monospace; color: var(--muted); margin-top: 12px; }
+.mascot .lute-msg { display: block; min-height: 2.8em; color: var(--red); margin-top: 6px; }
+@media (max-width: 700px) { .hero .wrap { grid-template-columns: 1fr; } .mascot { justify-self: start; text-align: left; } .mascot img { margin: 0; } }
+@media (prefers-reduced-motion: reduce) { .mascot img, .mascot button.strum img { animation: none; transition: none; } }
+.foot-mouse { width: 24px; height: 24px; border-radius: 5px; vertical-align: middle; }
+
 /* ticker */
 .ticker { overflow: hidden; background: var(--black); color: #f3eedf; border-block: 3px solid var(--gold); font: 500 .85rem/1 "IBM Plex Mono", monospace; }
 .ticker .track { display: inline-flex; gap: 48px; padding: 12px 0; white-space: nowrap; animation: scroll 70s linear infinite; }
@@ -179,7 +198,7 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
 
 <nav class="top" aria-label="Main">
   <div class="wrap">
-    <a class="logo" href="#top"><s>Less</s><span>Def</span>Wrong</a>
+    <a class="logo" href="#top"><img src="mouse.png" alt=""><span><s>Less</s><span>Def</span>Wrong</span></a>
     <ul>
       <li class="keep"><a href="#meetup">Meetup</a></li>
       <li><a href="#sequins">The Sequins</a></li>
@@ -193,6 +212,7 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
 <main id="top">
   <section class="hero">
     <div class="wrap">
+      <div>
       <div class="kicker">Baltimore's Rationalist Community · Est. [citation needed]</div>
       <h1><span class="strike">Less</span> Def Wrong.</h1>
       <p class="sub">Less Wrong is a <em>direction</em>. Def Wrong is a <em>destination</em>. Refining the art of human rationality, one crab cake at a time, hon.</p>
@@ -205,6 +225,11 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
         <span class="pill">📍 Technically not in Baltimore (see FAQ)</span>
         <span class="pill">🕖 Sundays, 7 PM (real)</span>
       </div>
+      </div>
+      <figure class="mascot">
+        <button type="button" id="lute" aria-label="Ask the mouse to play the lute"><img src="mouse.png" alt="A mouse in a medieval manuscript playing a lute"></button>
+        <figcaption>Our mascot, the Lute Mouse.<br>Tap to request a song.<span class="lute-msg" id="lute-msg" aria-live="polite"></span></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -225,9 +250,9 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
           <dt>When</dt><dd>Sundays at 7:00 PM. About half the meetups are virtual and half are in person, so check the weekly reminder email for which kind this week is.</dd>
           <dt>Where</dt><dd>In-person meetups have been held at UMBC: Performing Arts and Humanities Building, 1000 Hilltop Circle, Baltimore, MD 21250. For the big ACX "Meetups Everywhere" events, look for a sign reading “ACX Meetup.”</dd>
           <dt>Parking</dt><dd>Free on weekends at UMBC.</dd>
-          <dt>Organizers</dt><dd>adrusi and Rivka.</dd>
+          <dt>Organizer</dt><dd>Rivka.</dd>
           <dt>Contact</dt><dd>Email <a href="mailto:rivka@adrusi.com">rivka@adrusi.com</a> to join the mailing list for weekly reminders.</dd>
-          <dt>Chat</dt><dd>There's a <a href="https://discord.com/invite/meeUKNBRjX" rel="noopener">Baltimore ACX Discord</a> for the social side.</dd>
+          <dt>Chat</dt><dd>There's a <a href="https://discord.com/invite/meeUKNBRjX" rel="noopener">Baltimore LW Discord</a> for the social side.</dd>
           <dt>Links</dt><dd><a href="https://www.lesswrong.com/groups/SwxCqnYJaxjkXdzZ2" rel="noopener">LessWrong group page</a> · <a href="https://www.greaterwrong.com/posts/f9vBqaK38fmJBkCCG/baltimore-usa-acx-spring-schelling-2026" rel="noopener">Spring 2026 ACX meetup post</a> · <a href="https://www.astralcodexten.com/" rel="noopener">Astral Codex Ten</a> (Scott Alexander posts “Meetups Everywhere” lists each spring and fall)</dd>
         </dl>
         <p class="fine">Collected from public listings, October 2026. Rooms and schedules change, so email before driving out. Food and drinks were provided at the last big ACX meetup; RSVPs were optional but helped with food.</p>
@@ -321,7 +346,7 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
       </details>
       <details>
         <summary>Is this the official site?</summary>
-        <p>No. It's a parody fan page. For anything official, email the organizers at <a href="mailto:rivka@adrusi.com">rivka@adrusi.com</a> or check the <a href="https://www.lesswrong.com/groups/SwxCqnYJaxjkXdzZ2" rel="noopener">LessWrong group page</a>.</p>
+        <p>No. It's a parody fan page. For anything official, email the organizer at <a href="mailto:rivka@adrusi.com">rivka@adrusi.com</a> or check the <a href="https://www.lesswrong.com/groups/SwxCqnYJaxjkXdzZ2" rel="noopener">LessWrong group page</a>.</p>
       </details>
       <details>
         <summary>Why “Defwrong”?</summary>
@@ -344,6 +369,10 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
         <p>For real: parking at UMBC is free on weekends, and the meetup is on Sunday. Our model rarely gets anything this right.</p>
       </details>
       <details>
+        <summary>Why is there a mouse playing a lute?</summary>
+        <p>Medieval monks filled the margins of serious manuscripts with knights fighting snails, rabbits holding swords, and animals playing instruments. We think this is the correct way to annotate a serious text. The mouse is our marginalia. Its credence that it is a good lute player is 0.97, which is not well calibrated. We use it a lot.</p>
+      </details>
+      <details>
         <summary>Is Mr. Trash Wheel an aligned AI?</summary>
         <p>He eats trash at the mouth of the Jones Falls, has googly eyes, and has never once tried to seize resources beyond the Inner Harbor. Professor Trash Wheel, Captain Trash Wheel and Gwynnda the Good Wheel of the West also seem fine. In terms of track record, they are the most aligned systems in Maryland.</p>
       </details>
@@ -354,8 +383,8 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
 <footer class="site">
   <div class="wrap">
     <p><span class="counter" id="counter">0000000</span> &nbsp;visitors (± a lot; p &lt; 0.05 that this number means anything)</p>
-    <p><strong>Defwrong.org is satire.</strong> It is not affiliated with or endorsed by LessWrong.com, Lightcone Infrastructure, Astral Codex Ten, UMBC, McCormick &amp; Co. (Old Bay), the Baltimore Ravens, or the Waterfront Partnership's Healthy Harbor Initiative (the Trash Wheels). All testimonials are fictional. Meetup details were collected from public listings in October 2026 and could be out of date. Please email the organizers before you drive anywhere.</p>
-    <p>Epistemic status: joking, mostly. Confidence: 0.7. Old Bay: yes.</p>
+    <p><strong>Defwrong.org is satire.</strong> It is not affiliated with or endorsed by LessWrong.com, Lightcone Infrastructure, Astral Codex Ten, UMBC, McCormick &amp; Co. (Old Bay), the Baltimore Ravens, or the Waterfront Partnership's Healthy Harbor Initiative (the Trash Wheels). All testimonials are fictional. Meetup details were collected from public listings in October 2026 and could be out of date. Please email the organizer before you drive anywhere.</p>
+    <p><img class="foot-mouse" src="mouse.png" alt=""> Epistemic status: joking, mostly. Confidence: 0.7. Old Bay: yes. Mouse: yes.</p>
   </div>
 </footer>
 
@@ -375,6 +404,7 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
     ["Old Bay appears on a dessert at the potluck", "33%", "up"],
     ["Petrov Day ritual goes off without nuclear incident", "88%", "up"],
     ["Someone says “well, actually” before 7:05", "96%", "up"],
+    ["Lute Mouse learns a second song", "8%", "up"],
   ];
   const html = markets.map(([q, p, d]) => `<span>${q} <b>${p}</b> <span class="${d}">${d === "up" ? "▲" : "▼"}</span></span>`).join("");
   document.getElementById("ticker").innerHTML = html + html;
@@ -491,6 +521,24 @@ footer.site { padding: 40px 0 60px; border-top: 1px solid var(--rule); font-size
   });
   document.getElementById("bingo-new").addEventListener("click", newCard);
   newCard();
+
+  // ---------- lute mouse ----------
+  const songs = [
+    "♪ Ballad of the Well-Calibrated Prior ♪",
+    "♪ Greensleeves, but every note is hedged ♪",
+    "♪ An instrumental called “Shut Up and Multiply” ♪",
+    "♪ Hon, Won't You Update Your Beliefs ♪",
+    "♪ The Litany of Tarski, in D minor ♪",
+    "♪ Ode to Old Bay (extended mix) ♪",
+    "♪ Quoth the Raven, a ballad in seven verses ♪",
+  ];
+  let song = Math.floor(Math.random() * songs.length);
+  const lute = document.getElementById("lute");
+  lute.addEventListener("click", () => {
+    song = (song + 1) % songs.length;
+    document.getElementById("lute-msg").textContent = songs[song];
+    lute.classList.remove("strum"); void lute.offsetWidth; lute.classList.add("strum");
+  });
 
   // ---------- visitor counter (fake, obviously) ----------
   document.getElementById("counter").textContent = String(1000000 + Math.floor(Math.random() * 8999999)).padStart(7, "0");
